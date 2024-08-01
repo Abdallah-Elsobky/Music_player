@@ -31,10 +31,12 @@ public class MainActivity extends AppCompatActivity {
         rnext = findViewById(R.id.rnext);
         repeat = findViewById(R.id.repeat);
         shuffle = findViewById(R.id.shuffle);
+        MediaPlayer click = MediaPlayer.create(MainActivity.this,R.raw.click3);
         MediaPlayer mp3 = MediaPlayer.create(MainActivity.this,R.raw.quran);
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                click.start();
                 if(!mp3.isPlaying()){
                     play.setImageResource(R.drawable.pause);
                     mp3.start();
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         repeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                click.start();
                 if(isrepeat){
                     repeat.setImageResource(R.drawable.nonrepeat);
                 }else{
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         shuffle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                click.start();
                 if(isshuffle){
                     shuffle.setImageResource(R.drawable.shuffle);
                 }else{
