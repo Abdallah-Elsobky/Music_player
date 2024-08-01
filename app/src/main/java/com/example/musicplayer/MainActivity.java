@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
     ImageButton rnext;
     ImageButton repeat;
     ImageButton shuffle;
-    boolean isrepeat=true;
-    boolean isshuffle=true;
+    boolean isrepeat=false;
+    boolean isshuffle=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         rnext = findViewById(R.id.rnext);
         repeat = findViewById(R.id.repeat);
         shuffle = findViewById(R.id.shuffle);
-        MediaPlayer mp3 = MediaPlayer.create(MainActivity.this,R.raw.taha);
+        MediaPlayer mp3 = MediaPlayer.create(MainActivity.this,R.raw.quran);
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,28 +44,36 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
         repeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(isrepeat){
-                    repeat.setImageResource(R.drawable.repeat1);
-                }else{
                     repeat.setImageResource(R.drawable.nonrepeat);
+                }else{
+                    repeat.setImageResource(R.drawable.repeat1);
                 }
                 isrepeat = !isrepeat;
             }
         });
-
         shuffle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(isshuffle){
-                    shuffle.setImageResource(R.drawable.change);
-                }else{
                     shuffle.setImageResource(R.drawable.shuffle);
+                }else{
+                    shuffle.setImageResource(R.drawable.change);
                 }
                 isshuffle = !isshuffle;
+            }
+        });
+        mp3.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                if(isrepeat){
+                    mp3.start();
+                }else{
+                    play.setImageResource(R.drawable.playbuttton);
+                }
             }
         });
     }
